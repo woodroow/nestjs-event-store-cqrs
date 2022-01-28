@@ -1,3 +1,6 @@
+<h1 align="center">
+NestJS Kafka Event Store CQRS
+</h1>
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
@@ -11,12 +14,13 @@
     
 ## Description
 
-A lightweight **KafkaJS event-store** module for [CQRS](https://github.com/nestjs/cqrs) [Nest](https://github.com/kamilmysliwiec/nest) framework (node.js)
+A lightweight **KafkaJS event-store** module for [CQRS](https://github.com/nestjs/cqrs) [Nest](https://github.com/kamilmysliwiec/nest) framework (node.js). It requires `@nestjs/cqrs` and `kafkajs`
 
 ## Installation
 
 ```bash
 $ npm install --save nestjs-event-store-cqrs
+$ npm install --save kafkajs
 ```
 
 ## Quick Start
