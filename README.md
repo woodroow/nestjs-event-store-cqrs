@@ -32,7 +32,7 @@ import { EventStoreModule } from 'nestjs-event-store-cqrs';
     EventStoreModule.forRoot({
       client: {
         clientId: 'hero',
-        brokers: ['localhost:9093'],
+        brokers: ['localhost:9092'],
       },
       consumer: {
         groupId: 'hero-consumer',
