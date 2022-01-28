@@ -1,0 +1,37 @@
+{
+  "name": "nestjs-event-store-cqrs",
+  "version": "0.0.3",
+  "description": "NestJS CQRS event source module for KafkaJS",
+  "main": "dist/index",
+  "types": "dist/index",
+  "author": {
+    "name": "Artem Woodrow",
+    "email": "woodrow5943@gmail.com",
+    "url": "https://github.com/woodroow"
+  },
+  "keywords": ["kafka", "kafkajs", "nest", "nestjs", "cqrs","event", "event-store", "event-source"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && tsc",
+    "prepublish": "npm run build"
+  },
+  "repository": "https://github.com/woodroow/nestjs-event-store-cqrs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woodroow/nestjs-event-store-cqrs/issues"
+  },
+  "homepage": "https://github.com/woodroow/nestjs-event-store-cqrs#readme",
+  "dependencies": {
+    "@nestjs/common": "^8.2.6",
+    "@nestjs/cqrs": "^8.0.1",
+    "rxjs": "^7.2.0"
+  },
+  "peerDependencies": {
+    "kafkajs": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.13",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.5"
+  }
+}
