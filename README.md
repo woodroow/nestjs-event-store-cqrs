@@ -50,4 +50,4 @@ import { EventStoreModule } from 'nestjs-event-store-cqrs';
 export class AppModule {}
 ```
 
-*Full microservices example comming soon*
+[***FULL EXAMPLE***](https://github.com/woodroow/nestjs-event-store-cqrs-example)
