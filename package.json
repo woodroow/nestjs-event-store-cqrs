@@ -1,6 +1,6 @@
 {
   "name": "nestjs-event-store-cqrs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NestJS CQRS event source module for KafkaJS",
   "main": "dist/index",
   "types": "dist/index",

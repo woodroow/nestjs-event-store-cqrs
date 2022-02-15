@@ -131,11 +131,7 @@ export class EventStoreService
       messages: [{ value: JSON.stringify(event) }],
     };
 
-    try {
-      await this.producer.send(eventPayload);
-    } catch (err) {
-      this.logger.error(err);
-    }
+    await this.producer.send(eventPayload);
   }
 
   async bridgeEventsTo<T extends IEvent>(subject: Subject<T>): Promise<any> {
