@@ -41,9 +41,7 @@ import { EventStoreModule } from 'nestjs-event-store-cqrs';
       consumer: {
         groupId: 'hero-consumer',
       },
-      eventHandlers: {
-        HeroKilledDragonEvent: (data) => new HeroKilledDragonEvent(data),
-      },
+      events: [HeroKilledDragonEvent],
     }),
   ]
 })
