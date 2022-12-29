@@ -1,12 +1,16 @@
+import { Type } from '@nestjs/common';
 import { IEvent } from '@nestjs/cqrs';
 import { ConsumerConfig, KafkaConfig } from 'kafkajs';
 
 export interface EventStoreOptions {
   client?: KafkaConfig;
   consumer?: ConsumerConfig;
-  eventHandlers?: IEventConstructors;
+  events?: IEvents;
 }
 
+type Event = new (...args: any[]) => IEvent;
+export type IEvents = Event[];
+
 export interface IEventConstructors {
-  [key: string]: (...args: any[]) => IEvent;
+  [key: string]: Event;
 }

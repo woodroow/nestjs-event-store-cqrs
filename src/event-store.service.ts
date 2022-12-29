@@ -13,6 +13,7 @@ import {
 import {
   EventStoreOptions,
   IEventConstructors,
+  IEvents,
 } from './interfaces/event-store-options.interface';
 import {
   Consumer,
@@ -38,16 +39,17 @@ export class EventStoreService
   private producer: Producer;
   private consumer: Consumer;
   private subject$: Subject<IEvent>;
-  private eventHandlers: IEventConstructors;
+  private events: IEvents = [];
+  private eventsForSearch: IEventConstructors = {};
 
   private clientConfig: KafkaConfig;
   private consumerConfig: ConsumerConfig;
 
   constructor(
     @Inject(EVENT_STORE_OPTIONS) options: EventStoreOptions,
-    private readonly eventBus: EventBus,
+    private readonly eventBus: EventBus
   ) {
-    this.addEventHandlers(options.eventHandlers);
+    this.addEvents(options.events);
     this.clientConfig = { ...DEFAULT_CLIENT_CONFIG, ...options.client };
     this.consumerConfig = { ...DEFAULT_CONSUMER_CONFIG, ...options.consumer };
   }
@@ -81,12 +83,12 @@ export class EventStoreService
   async subscribe() {
     try {
       const subscriptions = [];
-      Object.keys(this.eventHandlers).map((topic) => {
+      this.events.forEach((event) => {
         subscriptions.push(
           this.consumer.subscribe({
-            topic: topic,
+            topic: event.name,
             fromBeginning: false,
-          }),
+          })
         );
       });
       if (!subscriptions.length) {
@@ -97,14 +99,16 @@ export class EventStoreService
       await this.consumer.run({
         eachMessage: async ({ topic, message }) => {
           const value = JSON.parse(message.value.toString());
-          if (this.eventHandlers && this.eventHandlers[topic]) {
-            const event = this.eventHandlers[topic](...Object.values(value));
-            this.subject$.next(event);
+          if (this.events && this.eventsForSearch[topic]) {
+            const func = new this.eventsForSearch[topic](
+              ...Object.values(value)
+            );
+            this.subject$.next(func);
           } else
             [
               this.logger.warn(
                 `Event of type ${topic} not handled`,
-                this.constructor.name,
+                this.constructor.name
               ),
             ];
         },
@@ -138,7 +142,10 @@ export class EventStoreService
     this.subject$ = subject;
   }
 
-  addEventHandlers(eventHandlers: IEventConstructors) {
-    this.eventHandlers = { ...this.eventHandlers, ...eventHandlers };
+  addEvents(events: IEvents = []) {
+    this.events = [...this.events, ...events];
+    this.events.map((event) => {
+      this.eventsForSearch[event.name] = event;
+    });
   }
 }

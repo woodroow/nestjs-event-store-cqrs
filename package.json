@@ -1,6 +1,6 @@
 {
   "name": "nestjs-event-store-cqrs",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "NestJS CQRS event source module for KafkaJS",
   "main": "dist/index",
   "types": "dist/index",
@@ -22,16 +22,17 @@
   },
   "homepage": "https://github.com/woodroow/nestjs-event-store-cqrs#readme",
   "dependencies": {
-    "@nestjs/common": "^8.2.6",
-    "@nestjs/cqrs": "^8.0.1",
-    "rxjs": "^7.2.0"
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/cqrs": "^9.0.1",
+    "rxjs": "^7.0.0"
   },
   "peerDependencies": {
-    "kafkajs": "^1.15.0"
+    "@nestjs/cqrs": "^9.0.1",
+    "kafkajs": "^1.16.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.13",
+    "@types/node": "^18.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.5.5"
+    "typescript": "^4.8.2"
   }
 }
